@@ -22,6 +22,20 @@ subroutine da_write_filtered_rad(ob, iv)
    do i = 1, iv%num_inst
       if (iv%instid(i)%num_rad < 1) cycle
 
+      do m=num_fgat_time,1,-1
+      iv%instid(i)%info%n1 = iv%instid(i)%info%plocal(m-1) + 1
+      iv%instid(i)%info%n2=iv%instid(i)%info%plocal(m)
+
+      if (num_fgat_time >1) then
+#ifdef DM_PARALLEL
+      write(unit=filename, fmt='(a,i2.2,a,i4.4)') &
+         'filtered_'//trim(iv%instid(i)%rttovid_string)//'_',m,'.', myproc
+#else
+      write(unit=filename, fmt='(a,i2.2)') &
+         'filtered_'//trim(iv%instid(i)%rttovid_string)//'_',m
+#endif
+      else
+
 #ifdef DM_PARALLEL
       write(unit=filename, fmt='(a,i4.4)') &
          'filtered_'//trim(iv%instid(i)%rttovid_string)//'.', myproc
@@ -29,6 +43,7 @@ subroutine da_write_filtered_rad(ob, iv)
       write(unit=filename, fmt='(a)') &
          'filtered_'//trim(iv%instid(i)%rttovid_string)
 #endif
+      endif
       
       call da_get_unit(filtered_rad_unit)
       open(unit=filtered_rad_unit,file=trim(filename), &
