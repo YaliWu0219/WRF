@@ -230,7 +230,7 @@ subroutine da_setup_radiance_structures( grid, ob, iv )
          end if
          if (data_format==2) then		 
             write(unit=stdout,fmt='(a)') 'Reading AHI data from geocat NETCDF4'
-#            call da_read_obs_netcdf4ahi_geocat (iv, 'L1AHITBR', 'L2AHICLP')
+!            call da_read_obs_netcdf4ahi_geocat (iv, 'L1AHITBR', 'L2AHICLP')
             call da_read_obs_AHI (iv, 'L1AHITBR')
          end if
          if (data_format==3) then		 

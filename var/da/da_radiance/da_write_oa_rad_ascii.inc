@@ -12,7 +12,7 @@ subroutine da_write_oa_rad_ascii (it, ob, iv, re )
    type (y_type),     intent(in)  :: re       ! O-A structure.
 
    integer                        :: n        ! Loop counter.
-   integer                        :: i, k, m, m1, m2    ! Index dimension.
+   integer                        :: i, k, m  ! Index dimension.
    integer                        :: nlevelss ! Number of obs levels.
 
    integer            :: ios, oma_rad_unit
@@ -71,7 +71,7 @@ subroutine da_write_oa_rad_ascii (it, ob, iv, re )
       write(unit=oma_rad_unit,fmt='(a)') ' xb-surf-info : i t2m mr2m(ppmv) u10 v10 ps ts smois tslb snowh isflg &
                        & soiltyp vegtyp vegfra elev clwp'
       ndomain = 0
-      do n = iv%instid(i)%info%n1,iv%instid(i)%info%n
+      do n = iv%instid(i)%info%n1,iv%instid(i)%info%n2
          if (iv%instid(i)%info%proc_domain(1,n)) then
             ndomain=ndomain+1
             if ( amsr2 ) then !write out clw

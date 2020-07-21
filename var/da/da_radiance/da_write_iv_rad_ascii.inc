@@ -11,7 +11,7 @@ subroutine da_write_iv_rad_ascii (it, ob, iv )
    type (iv_type),    intent(in)  :: iv       ! O-B structure.
 
    integer                        :: n        ! Loop counter.
-   integer                        :: i, k, l, m, m1, m2  ! Index dimension.
+   integer                        :: i, k, l, m  ! Index dimension.
    integer                        :: nlevelss ! Number of obs levels.
 
    integer            :: ios, innov_rad_unit
